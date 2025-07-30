@@ -1,0 +1,8 @@
+require('ts-node/register');
+const path = require('path');
+
+module.exports = {
+  config: path.resolve('dist', 'infra', 'db', 'postgress', 'config', 'database-config.js'),
+  migrationsPath: path.resolve('dist', 'infra', 'db', 'postgress', 'migrations'),
+  seedersPath: path.resolve('dist', 'infra', 'db', 'postgress', 'seeders')
+};
