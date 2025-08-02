@@ -2,28 +2,21 @@ import { DataTypes, QueryInterface } from 'sequelize'
 
 export = {
   up: async (queryInterface: QueryInterface) => {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('Orders', {
       id: {
         type: DataTypes.BIGINT,
         autoIncrement: true,
         primaryKey: true,
         allowNull: false,
       },
-      name: {
-        type: DataTypes.STRING,
+      productId: {
+        type: DataTypes.BIGINT,
+        autoIncrement: true,
         allowNull: false,
-      },
-      email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      phoneNumber: {
-        type: DataTypes.STRING,
-        allowNull: false,
+        references: {
+          model: 'Products',  // nome da tabela, não o nome do modelo
+          key: 'id'
+        }
       },
       createdAt: {
         type: DataTypes.DATE,
@@ -39,6 +32,6 @@ export = {
   },
 
   down: async (queryInterface: QueryInterface) => {
-    await queryInterface.dropTable('users');
+    await queryInterface.dropTable('Orders');
   }
 };
