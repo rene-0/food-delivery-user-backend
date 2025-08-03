@@ -1,12 +1,12 @@
-
-
-import express from 'express'
+import http from 'http'
 import { SequelizeHelper } from '../infra/db/postgress/helpers/sequelize-helper'
 
-
-const app = express()
-
-app.listen(process.env.SERVER_PORT, async () => {
-  await SequelizeHelper.connect()
-  console.log(`Server started at ${process.env.SERVER_PORT}`)
-})
+const port = process.env.SERVER_PORT
+SequelizeHelper.connect()
+  .then(async () => {
+    const app = (await import('./config/app')).default
+    const httpServer = http.createServer(app)
+    httpServer.listen(port)
+    console.log(`Server running at http://localhost:${port}`)
+  })
+  .catch(console.error)
