@@ -1,8 +1,7 @@
-import { IAuthentication } from 'domain/use-cases/authentication/authentication'
-import jwt from 'jsonwebtoken'
-import { ok, serverError, unauthorized } from 'presentation/helpers/http-helper'
-import { Controller } from 'presentation/protocols/controller'
-import { HttpResponse } from 'presentation/protocols/http'
+import { IAuthentication } from '../../../../domain/use-cases/authentication/authentication'
+import { ok, serverError, unauthorized } from '../../../helpers/http-helper'
+import { Controller } from '../../../protocols/controller'
+import { HttpResponse } from '../../../protocols/http'
 
 export class LoginController implements Controller {
   constructor(private readonly useAuthentication: IAuthentication) {}
@@ -14,13 +13,7 @@ export class LoginController implements Controller {
         return unauthorized(new Error('Invalid credentials'))
       }
 
-      const { email, name } = auth
-
-      const expiresInSeconds = 60 * 60 // 1h
-
-      const token = jwt.sign(auth, 'secret', { expiresIn: expiresInSeconds })
-
-      return ok({ email, name, accessToken: { token, expiresIn: expiresInSeconds } })
+      return ok(auth)
     } catch (error) {
       return serverError(error)
     }

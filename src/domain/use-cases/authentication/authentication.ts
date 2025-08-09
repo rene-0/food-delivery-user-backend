@@ -1,5 +1,3 @@
-import { User } from 'domain/models/entities/User'
-
 export interface IAuthentication {
   authenticate: (request: IAuthentication.Request) => Promise<IAuthentication.Response>
 }
@@ -10,9 +8,14 @@ export namespace IAuthentication {
     password: string
   }
 
+  type AccessToken = {
+    token: string
+    expiresIn: number
+  }
+
   export type Response = {
-    name: User['name']
-    email: User['email']
-    phoneNumber: User['phoneNumber']
+    email: string
+    name: string
+    accessToken: AccessToken
   }
 }
