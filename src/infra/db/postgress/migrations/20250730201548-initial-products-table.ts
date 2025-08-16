@@ -2,7 +2,7 @@ import { DataTypes, QueryInterface } from 'sequelize'
 
 export = {
   up: async (queryInterface: QueryInterface) => {
-    await queryInterface.createTable('Producs', {
+    await queryInterface.createTable('Products', {
       id: {
         type: DataTypes.BIGINT,
         autoIncrement: true,
@@ -27,10 +27,10 @@ export = {
         allowNull: false,
         defaultValue: new Date(),
       },
-    });
+    })
   },
 
   down: async (queryInterface: QueryInterface) => {
-    await queryInterface.dropTable('Producs');
-  }
-};
+    await queryInterface.dropTable('Producs')
+  },
+}

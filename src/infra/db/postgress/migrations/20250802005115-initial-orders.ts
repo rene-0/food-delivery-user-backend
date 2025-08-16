@@ -13,6 +13,15 @@ export = {
         type: DataTypes.ENUM('canceled', 'pending', 'accepted', 'done'),
         allowNull: false,
       },
+      productId: {
+        type: DataTypes.BIGINT,
+        autoIncrement: false,
+        allowNull: false,
+        references: {
+          model: 'Users', // nome da tabela, não o nome do modelo
+          key: 'id',
+        },
+      },
       createdAt: {
         type: DataTypes.DATE,
         allowNull: false,
@@ -23,10 +32,10 @@ export = {
         allowNull: false,
         defaultValue: new Date(),
       },
-    });
+    })
   },
 
   down: async (queryInterface: QueryInterface) => {
-    await queryInterface.dropTable('Orders');
-  }
-};
+    await queryInterface.dropTable('Orders')
+  },
+}
