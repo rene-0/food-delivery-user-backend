@@ -1,8 +1,8 @@
-export interface DoesAccountExists {
-  doesAccountExists: (request: DoesAccountExists.Request) => Promise<DoesAccountExists.Response>
+export interface IDoesAccountExists {
+  doesAccountExists: (request: IDoesAccountExists.Request) => Promise<IDoesAccountExists.Response>
 }
 
-export namespace DoesAccountExists {
+export namespace IDoesAccountExists {
   export type Request = {
     email: string
   }

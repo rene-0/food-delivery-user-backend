@@ -33,7 +33,6 @@ export function unauthorized(error: Error): HttpResponse<any> {
 }
 
 export function forbidden(error: Error): HttpResponse<any> {
-  console.log('call', error.message)
   return {
     statusCode: 403,
     body: error.message,

@@ -1,4 +1,4 @@
-import { User } from 'domain/models/entities/User'
+import { User } from '../../../domain/models/entities/User'
 
 export interface AuthenticationRepository {
   authenticate: (request: AuthenticationRepository.Request) => Promise<AuthenticationRepository.Response>
