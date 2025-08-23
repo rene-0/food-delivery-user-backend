@@ -31,6 +31,6 @@ export = {
   },
 
   down: async (queryInterface: QueryInterface) => {
-    await queryInterface.dropTable('Producs')
+    await queryInterface.dropTable('Products')
   },
 }
