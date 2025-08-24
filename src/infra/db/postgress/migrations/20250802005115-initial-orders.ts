@@ -13,7 +13,7 @@ export = {
         type: DataTypes.ENUM('canceled', 'pending', 'accepted', 'done'),
         allowNull: false,
       },
-      productId: {
+      userId: {
         type: DataTypes.BIGINT,
         autoIncrement: false,
         allowNull: false,
