@@ -7,7 +7,7 @@ export class GetProduct implements IGetProduct {
   async getProduct(request: IGetProduct.Request): Promise<IGetProduct.Response> {
     const product = await this.productRepository.getProduct({ productId: request.id })
     if (!product) {
-      throw null
+      return null
     }
     const { id, name, price, createdAt, updatedAt } = product
     return new Product(id, name, price, createdAt, updatedAt)
