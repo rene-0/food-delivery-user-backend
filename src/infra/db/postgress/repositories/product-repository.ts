@@ -1,5 +1,5 @@
 import { QueryTypes } from 'sequelize'
-import { GetProductRepository } from '../../../../data/protocols/product/get-product'
+import { GetProductRepository } from '../../../../data/protocols/product/get-product-repository'
 import { GetProductsRepository } from '../../../../data/protocols/product/get-products-respository'
 import { SequelizeHelper } from '../helpers/sequelize-helper'
 

@@ -3,7 +3,7 @@ import { Date } from '../value-objects/Date'
 export class Product {
   private readonly _createdAt: Date
   private readonly _updatedAt: Date
-  constructor(readonly _id: number, readonly _name: string, readonly _price: number, _createdAtString: string, _updatedAtString: string) {
+  constructor(private readonly _id: number, private readonly _name: string, private readonly _price: number, _createdAtString: string, _updatedAtString: string) {
     this._createdAt = new Date(_createdAtString)
     this._updatedAt = new Date(_updatedAtString)
   }
