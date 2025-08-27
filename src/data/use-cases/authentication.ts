@@ -1,15 +1,22 @@
-import crypto from 'crypto'
+import argon2 from 'argon2'
 import jwt from 'jsonwebtoken'
 import { IAuthentication } from '../../domain/use-cases/authentication/authentication'
-import { AuthenticationRepository } from '../protocols/authentication/user-authentication'
+import { FindUserByEmailRepository } from '../protocols/user/get-user-by-email'
+
+const PEPPER = process.env.PASSWORD_PEPPER ?? ''
 
 export class Authentication implements IAuthentication {
-  constructor(readonly userRepository: AuthenticationRepository) {}
+  constructor(readonly userRepository: FindUserByEmailRepository) {}
   async authenticate(request: IAuthentication.Request): Promise<IAuthentication.Response> {
-    const hash = crypto.createHash('sha256').update(request.password).digest('hex')
-    const user = await this.userRepository.authenticate({ email: request.email, password: hash })
+    const user = await this.userRepository.findUserByEmail({ email: request.email })
 
     if (!user) {
+      return undefined
+    }
+
+    const isValid = await argon2.verify(user.password, PEPPER + request.password)
+
+    if (!isValid) {
       return undefined
     }
 

@@ -16,6 +16,7 @@ export namespace IAuthentication {
   export type Response = {
     email: string
     name: string
+    password?: never
     accessToken: AccessToken
   }
 }
