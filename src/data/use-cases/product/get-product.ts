@@ -5,7 +5,11 @@ import { GetProductRepository } from '../../protocols/product/get-product-reposi
 export class GetProduct implements IGetProduct {
   constructor(readonly productRepository: GetProductRepository) {}
   async getProduct(request: IGetProduct.Request): Promise<IGetProduct.Response> {
-    const { id, name, price, createdAt, updatedAt } = await this.productRepository.getProduct({ productId: request.id })
+    const product = await this.productRepository.getProduct({ productId: request.id })
+    if (!product) {
+      throw null
+    }
+    const { id, name, price, createdAt, updatedAt } = product
     return new Product(id, name, price, createdAt, updatedAt)
   }
 }

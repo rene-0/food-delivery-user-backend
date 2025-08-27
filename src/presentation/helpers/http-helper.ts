@@ -11,11 +11,20 @@ export function badRequest<T>(response: any): HttpResponse<any> {
   }
 }
 
+export function notFound<T>(response: any): HttpResponse<any> {
+  return {
+    statusCode: 404,
+    body: {
+      response,
+    },
+  }
+}
+
 export function serverError(error: Error): HttpResponse<any> {
   console.error(error)
   return {
     statusCode: 500,
-    body: process.env.NODE_ENV === 'production' ? 'Server error' : error.stack,
+    body: process.env.NODE_ENV === 'production' ? 'Server error' : error?.stack,
   }
 }
 
