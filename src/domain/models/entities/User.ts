@@ -4,7 +4,7 @@ export class User {
   private readonly _createdAt: Date
   private readonly _updatedAt: Date
   constructor(
-    private readonly _id: number,
+    private readonly _id: string,
     private readonly _name: string,
     private readonly _email: string,
     private readonly _password: string,
