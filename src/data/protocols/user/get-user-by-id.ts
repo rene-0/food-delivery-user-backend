@@ -10,9 +10,12 @@ export namespace GetUserByIdRepository {
   }
 
   export type Response = {
+    id: User['id']
     name: User['name']
     email: User['email']
     password: User['password']
     phoneNumber: User['phoneNumber']
+    createdAt: string
+    updatedAt: string
   }
 }
