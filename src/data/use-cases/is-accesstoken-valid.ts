@@ -1,12 +1,6 @@
 import jwt from 'jsonwebtoken'
 import { IIsAccessTokenValid } from '../../domain/use-cases/authentication/is-accesstoken-valid.ts'
 
-type DecodedToken = {
-  email: string
-  name: string
-  phoneNumber: string
-}
-
 export class IsAccessTokenValid implements IIsAccessTokenValid {
   constructor() {}
   async isAccessTokenValid({ accessToken }: IIsAccessTokenValid.Request): Promise<IIsAccessTokenValid.Response> {

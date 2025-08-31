@@ -74,7 +74,7 @@ export class UserRepository implements FindUserByEmailRepository, DoesAccountExi
 
   async findUserByEmail({ email }: FindUserByEmailRepository.Request): Promise<FindUserByEmailRepository.Response> {
     const sql = `
-			select name, email, u."phoneNumber", password, "createdAt", "updatedAt"
+			select id, name, email, u."phoneNumber", password, "createdAt", "updatedAt"
 			from "Users" u
 			where email = :email
 		`
