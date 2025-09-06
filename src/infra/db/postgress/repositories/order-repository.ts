@@ -1,10 +1,75 @@
 import { QueryTypes } from 'sequelize'
 import { CreateOrderRepository } from '../../../../data/protocols/order/create-order-repository'
 import { GetOrderRepository } from '../../../../data/protocols/order/get-order-repository'
+import { GetOrdersRepository } from '../../../../data/protocols/order/get-orders-repository'
 import { SequelizeHelper } from '../helpers/sequelize-helper'
 
-export class OrderRepository implements CreateOrderRepository, GetOrderRepository {
+export class OrderRepository implements CreateOrderRepository, GetOrderRepository, GetOrdersRepository {
   constructor(private readonly sequelize = SequelizeHelper.instance.sequelize) {}
+  async getOrders(request: GetOrdersRepository.Request): Promise<GetOrdersRepository.Response> {
+    const orders = await this.sequelize.query<GetOrdersRepository.QueryResponse>(
+      `SELECT
+          o.id as "order.id",
+          o.status as "order.status",
+          o."createdAt" as "order.createdAt",
+          o."updatedAt" as "order.updatedAt",
+          op.id as "orderProduct.id",
+          op.quantity as "orderProduct.quantity",
+          op."createdAt" as "orderProduct.createdAt",
+          op."updatedAt" as "orderProduct.updatedAt",
+          p.id as "product.id",
+          p.name as "product.name",
+          p.price as "product.price",
+          p."createdAt" as "product.createdAt",
+          p."updatedAt" as "product.updatedAt",
+          u.id as "user.id",
+          u.name as "user.name",
+          u.email as "user.email",
+          u."phoneNumber" as "user.phoneNumber",
+          u."createdAt" as "user.createdAt",
+          u."updatedAt" as "user.updatedAt"
+         FROM "Orders" o
+         INNER JOIN "OrderProducts" op ON o.id = op."orderId"
+         INNER JOIN "Products" p ON p.id = op."productId"
+         INNER JOIN "Users" u ON u.id = o."userId"
+         WHERE o."userId" = :userId
+         ORDER BY o."createdAt" DESC`,
+      {
+        replacements: request.userId ? { userId: request.userId } : {},
+        type: QueryTypes.SELECT,
+        nest: true,
+      }
+    )
+
+    if (!orders || !Array.isArray(orders) || orders.length === 0) {
+      return []
+    }
+
+    // Group by order.id
+    const orderMap = new Map<string, GetOrdersRepository.Response[number]>()
+    for (const row of orders) {
+      const orderId = row.order.id
+      if (!orderMap.has(orderId)) {
+        orderMap.set(orderId, {
+          id: row.order.id,
+          status: row.order.status,
+          user: row.user,
+          orderProducts: [],
+          createdAt: row.order.createdAt,
+          updatedAt: row.order.updatedAt,
+        })
+      }
+      orderMap.get(orderId).orderProducts.push({
+        id: row.orderProduct.id,
+        product: row.product,
+        quantity: row.orderProduct.quantity,
+        createdAt: row.orderProduct.createdAt,
+        updatedAt: row.orderProduct.updatedAt,
+      })
+    }
+
+    return Array.from(orderMap.values())
+  }
   async getOrder(request: GetOrderRepository.Request): Promise<GetOrderRepository.Response> {
     const order = await this.sequelize.query<GetOrderRepository.QueryResponse>(
       `SELECT
