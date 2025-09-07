@@ -2,10 +2,29 @@ import { QueryTypes } from 'sequelize'
 import { CreateOrderRepository } from '../../../../data/protocols/order/create-order-repository'
 import { GetOrderRepository } from '../../../../data/protocols/order/get-order-repository'
 import { GetOrdersRepository } from '../../../../data/protocols/order/get-orders-repository'
+import { UpdateOrderRepository } from '../../../../data/protocols/order/update-order-repository'
 import { SequelizeHelper } from '../helpers/sequelize-helper'
 
-export class OrderRepository implements CreateOrderRepository, GetOrderRepository, GetOrdersRepository {
+export class OrderRepository implements CreateOrderRepository, GetOrderRepository, GetOrdersRepository, UpdateOrderRepository {
   constructor(private readonly sequelize = SequelizeHelper.instance.sequelize) {}
+  async updateOrder(request: UpdateOrderRepository.Request): Promise<UpdateOrderRepository.Response> {
+    const [order] = await this.sequelize.query<{ id: string }>(
+      `UPDATE "Orders"
+         SET status = :status, "updatedAt" = NOW()
+         WHERE id = :orderId AND "userId" = :userId
+         RETURNING id
+         `,
+      {
+        replacements: {
+          orderId: request.orderId,
+          status: request.status,
+          userId: request.userId,
+        },
+        type: QueryTypes.SELECT,
+      }
+    )
+    return { id: order.id }
+  }
   async getOrders(request: GetOrdersRepository.Request): Promise<GetOrdersRepository.Response> {
     const orders = await this.sequelize.query<GetOrdersRepository.QueryResponse>(
       `SELECT
