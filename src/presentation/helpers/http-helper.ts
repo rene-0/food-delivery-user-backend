@@ -21,7 +21,7 @@ export function notFound<T>(response: any): HttpResponse<any> {
 }
 
 export function serverError(error: Error): HttpResponse<any> {
-  console.error(error)
+  console.log(error)
   return {
     statusCode: 500,
     body: process.env.NODE_ENV === 'production' ? 'Server error' : error?.stack,
