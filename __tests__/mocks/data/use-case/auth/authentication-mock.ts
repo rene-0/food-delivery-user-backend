@@ -1,4 +1,4 @@
-import { IAuthentication } from '../../../../src/domain/use-cases/authentication/authentication'
+import { IAuthentication } from '../../../../../src/domain/use-cases/authentication/authentication'
 
 export class AuthenticationMock implements IAuthentication {
   async authenticate(request: IAuthentication.Request): Promise<IAuthentication.Response> {

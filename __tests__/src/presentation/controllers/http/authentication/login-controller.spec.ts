@@ -1,5 +1,5 @@
 import { LoginController } from '../../../../../../src/presentation/controllers/http/authentication/login-controller'
-import { AuthenticationMock } from '../../../../../mocks/data/use-case/authentication-mock'
+import { AuthenticationMock } from '../../../../../mocks/data/use-case/auth/authentication-mock'
 
 describe('Login controller', () => {
   it('should return unauthorized', async () => {
