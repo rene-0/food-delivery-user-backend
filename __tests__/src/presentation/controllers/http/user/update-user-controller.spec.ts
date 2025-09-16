@@ -22,8 +22,8 @@ describe('UpdateUserController', () => {
     expect(response.statusCode).toBe(200)
     expect(response.body).toEqual({
       name: 'any_name',
-      email: 'any_email',
-      phoneNumber: '1234567890',
+      email: 'any_email@hotmail.com',
+      phoneNumber: 'any_phoneNumber',
       createdAt: '1998-01-01',
       updatedAt: '1998-01-01',
     })
