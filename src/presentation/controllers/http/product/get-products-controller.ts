@@ -1,11 +1,11 @@
-import { GetProducts } from '../../../../data/use-cases/product/get-products'
 import { Product } from '../../../../domain/models/entities/Product'
+import { IGetProducts } from '../../../../domain/use-cases/product/get-products'
 import { ok, serverError } from '../../../helpers/http-helper'
 import { Controller } from '../../../protocols/controller'
 import { HttpResponse } from '../../../protocols/http'
 
 export class GetProductsController implements Controller {
-  constructor(private readonly getProducts: GetProducts) {}
+  constructor(private readonly getProducts: IGetProducts) {}
 
   async handle(): Promise<HttpResponse<GetProductsController.Response[]>> {
     try {
