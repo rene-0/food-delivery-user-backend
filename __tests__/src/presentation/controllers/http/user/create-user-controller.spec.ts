@@ -38,4 +38,17 @@ describe('CreateUserController', () => {
       updatedAt: '1998-01-01',
     })
   })
+
+  it('should return server error when exception is throw', async () => {
+    const auth = new CreateUserMock()
+    jest.spyOn(auth, 'createUser').mockRejectedValueOnce(new Error('any_error'))
+    const sut = new CreateUserController(auth)
+    const response = await sut.handle({
+      name: 'any_name',
+      email: 'any_email@hotmail.com',
+      password: 'any_password',
+      phoneNumber: 'any_phoneNumber',
+    })
+    expect(response.statusCode).toBe(500)
+  })
 })

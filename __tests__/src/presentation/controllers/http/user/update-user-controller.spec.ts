@@ -18,7 +18,7 @@ describe('UpdateUserController', () => {
 
   it('should return ok if user is updated', async () => {
     const sut = new UpdateUserController(new UpdateUserMock())
-    const response = await sut.handle({ id: 'valid_id', name: 'Test' })
+    const response = await sut.handle({ id: 'valid_id', name: 'any_name' })
     expect(response.statusCode).toBe(200)
     expect(response.body).toEqual({
       name: 'any_name',
@@ -27,5 +27,13 @@ describe('UpdateUserController', () => {
       createdAt: '1998-01-01',
       updatedAt: '1998-01-01',
     })
+  })
+
+  it('should return server error when exception is throw', async () => {
+    const auth = new UpdateUserMock()
+    jest.spyOn(auth, 'updateUser').mockRejectedValueOnce(new Error('any_error'))
+    const sut = new UpdateUserController(auth)
+    const response = await sut.handle({ id: 'valid_id', name: 'any_name' })
+    expect(response.statusCode).toBe(500)
   })
 })
