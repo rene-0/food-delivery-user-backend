@@ -19,7 +19,6 @@ export class GetOrdersController implements Controller {
 export namespace GetOrdersController {
   export type Request = {
     user: { id: string }
-    products: Array<{ id: string; quantity: number }>
   }
 
   type Order = {
