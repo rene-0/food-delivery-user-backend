@@ -3,10 +3,10 @@ import { ok, serverError } from '../../../helpers/http-helper'
 import { Controller } from '../../../protocols/controller'
 import { HttpResponse } from '../../../protocols/http'
 
-export class GetOrdersControllerController implements Controller {
+export class GetOrdersController implements Controller {
   constructor(private readonly getOrders: IGetOrders) {}
 
-  async handle(httpRequest: GetOrdersControllerController.Request): Promise<HttpResponse<any>> {
+  async handle(httpRequest: GetOrdersController.Request): Promise<HttpResponse<any>> {
     try {
       const orders = await this.getOrders.getOrders({ userId: httpRequest.user.id })
       return ok(orders.map((order) => order.toJson()))
@@ -16,7 +16,7 @@ export class GetOrdersControllerController implements Controller {
   }
 }
 
-export namespace GetOrdersControllerController {
+export namespace GetOrdersController {
   export type Request = {
     user: { id: string }
     products: Array<{ id: string; quantity: number }>
