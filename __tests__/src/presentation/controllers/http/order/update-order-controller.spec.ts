@@ -13,7 +13,7 @@ describe('UpdateOrderController', () => {
     const response = await sut.handle({
       user: { id: 'any_user_id' },
       orderId: 'any_order_id',
-      status: 'done',
+      status: 'canceled',
     })
     expect(response.statusCode).toBe(200)
     expect(response.body).toStrictEqual({
@@ -39,7 +39,7 @@ describe('UpdateOrderController', () => {
     const response = await sut.handle({
       user: { id: 'any_user_id' },
       orderId: 'any_order_id',
-      status: 'done',
+      status: 'canceled',
     })
     expect(response.statusCode).toBe(500)
   })
