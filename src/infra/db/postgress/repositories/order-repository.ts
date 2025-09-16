@@ -23,7 +23,7 @@ export class OrderRepository implements CreateOrderRepository, GetOrderRepositor
         type: QueryTypes.SELECT,
       }
     )
-    return { id: order.id }
+    return order?.id
   }
   async getOrders(request: GetOrdersRepository.Request): Promise<GetOrdersRepository.Response> {
     const orders = await this.sequelize.query<GetOrdersRepository.QueryResponse>(

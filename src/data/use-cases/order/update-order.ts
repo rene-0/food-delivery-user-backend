@@ -13,7 +13,11 @@ export class UpdateOrder implements IUpdateOrder {
   async updateOrder(request: IUpdateOrder.Request): Promise<IUpdateOrder.Response> {
     const orderId = await this.orderRepository.updateOrder({ orderId: request.orderId, status: request.status, userId: request.userId })
 
-    const order = await this.orderRepository.getOrder({ orderId: orderId.id })
+    if (!orderId) {
+      return null
+    }
+
+    const order = await this.orderRepository.getOrder({ orderId: orderId })
     if (order) {
       return new Order(
         order.id,

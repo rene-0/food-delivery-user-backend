@@ -19,12 +19,17 @@ export class UpdateOrderController implements Controller {
           }))
         )
       }
-      const orders = await this.updateOrder.updateOrder({
+      const order = await this.updateOrder.updateOrder({
         userId: httpRequest.user.id,
         orderId: httpRequest.orderId,
         status: httpRequest.status,
       })
-      return ok(orders.toJson())
+
+      if (!order) {
+        return badRequest([{ field: 'orderId', message: 'Order not found' }])
+      }
+
+      return ok(order.toJson())
     } catch (error) {
       return serverError(error)
     }

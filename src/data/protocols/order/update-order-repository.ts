@@ -11,7 +11,5 @@ export namespace UpdateOrderRepository {
     status: Order['status']
   }
 
-  export type Response = {
-    id: string
-  }
+  export type Response = string
 }
