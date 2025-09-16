@@ -24,9 +24,9 @@ describe('GetProductController', () => {
   })
 
   it('should return server error when exception is throw', async () => {
-    const auth = new GetProductMock()
-    jest.spyOn(auth, 'getProduct').mockRejectedValueOnce(new Error('any_error'))
-    const sut = new GetProductController(auth)
+    const getProduct = new GetProductMock()
+    jest.spyOn(getProduct, 'getProduct').mockRejectedValueOnce(new Error('any_error'))
+    const sut = new GetProductController(getProduct)
     const response = await sut.handle({ id: 1 })
     expect(response.statusCode).toBe(500)
   })

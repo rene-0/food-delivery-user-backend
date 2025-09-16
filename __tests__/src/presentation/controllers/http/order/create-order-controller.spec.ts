@@ -32,9 +32,9 @@ describe('CreateOrderController', () => {
   })
 
   it('should return server error when exception is throw', async () => {
-    const auth = new CreateOrderMock()
-    jest.spyOn(auth, 'createOrder').mockRejectedValueOnce(new Error('any_error'))
-    const sut = new CreateOrderController(auth)
+    const createOrder = new CreateOrderMock()
+    jest.spyOn(createOrder, 'createOrder').mockRejectedValueOnce(new Error('any_error'))
+    const sut = new CreateOrderController(createOrder)
     const response = await sut.handle({
       user: { id: 'any_user_id' },
       products: [{ id: 'any_product_id', quantity: 1 }],

@@ -33,9 +33,9 @@ describe('UpdateOrderController', () => {
   })
 
   it('should return server error when exception is throw', async () => {
-    const auth = new UpdateOrderMock()
-    jest.spyOn(auth, 'updateOrder').mockRejectedValueOnce(new Error('any_error'))
-    const sut = new UpdateOrderController(auth)
+    const updateOrder = new UpdateOrderMock()
+    jest.spyOn(updateOrder, 'updateOrder').mockRejectedValueOnce(new Error('any_error'))
+    const sut = new UpdateOrderController(updateOrder)
     const response = await sut.handle({
       user: { id: 'any_user_id' },
       orderId: 'any_order_id',
