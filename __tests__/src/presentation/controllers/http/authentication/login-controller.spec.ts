@@ -16,7 +16,7 @@ describe('Login controller', () => {
     expect(response.statusCode).toBe(200)
   })
 
-  it('should return server error', async () => {
+  it('should return server error when exception is throw', async () => {
     const auth = new AuthenticationMock()
     jest.spyOn(auth, 'authenticate').mockRejectedValueOnce(new Error('any_error'))
     const sut = new LoginController(auth)
