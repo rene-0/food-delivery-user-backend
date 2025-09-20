@@ -19,7 +19,12 @@ export class UpdateUserController implements Controller {
         )
       }
 
-      const user = await this.updateUser.updateUser(httpRequest)
+      const user = await this.updateUser.updateUser({
+        id: httpRequest.user.id,
+        name: httpRequest.name,
+        password: httpRequest.password,
+        phoneNumber: httpRequest.phoneNumber,
+      })
       if (!user) {
         return badRequest([{ field: 'id', message: 'User not found' }])
       }
@@ -33,7 +38,7 @@ export class UpdateUserController implements Controller {
 
 export namespace UpdateUserController {
   export type Request = {
-    id: string
+    user: { id: string }
     name?: string
     password?: string
     phoneNumber?: string
