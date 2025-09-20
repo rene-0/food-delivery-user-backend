@@ -1,3 +1,4 @@
+import { User } from '../../../../domain/models/entities/User'
 import { IAuthentication } from '../../../../domain/use-cases/authentication/authentication'
 import { ok, serverError, unauthorized } from '../../../helpers/http-helper'
 import { Controller } from '../../../protocols/controller'
@@ -32,8 +33,9 @@ export namespace LoginController {
   }
 
   export type Response = {
-    email: string
-    name: string
+    email: User['email']
+    name: User['name']
+    phoneNumber: User['phoneNumber']
     accessToken: AccessToken
   }
 }
