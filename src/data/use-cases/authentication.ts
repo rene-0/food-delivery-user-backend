@@ -24,7 +24,8 @@ export class Authentication implements IAuthentication {
 
     const expiresInSeconds = 60 * 60 // 1h
 
-    const token = jwt.sign({ id, email, name, phoneNumber }, process.env.SECRETE_TOKEN, { expiresIn: expiresInSeconds })
-    return { name, email, phoneNumber, accessToken: { token, expiresIn: expiresInSeconds } }
+    const accessToken = jwt.sign({ id, email, name, phoneNumber }, process.env.SECRETE_TOKEN, { expiresIn: '1h' })
+    const refreshToken = jwt.sign({ id, email, name, phoneNumber }, process.env.REFRESH_TOKEN, { expiresIn: '7d' })
+    return { name, email, phoneNumber, accessToken: { token: accessToken, expiresIn: expiresInSeconds }, refreshToken }
   }
 }

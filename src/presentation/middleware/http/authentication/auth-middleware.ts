@@ -1,6 +1,6 @@
 import { IDoesAccountExists } from '../../../../domain/use-cases/authentication/does-account-exists'
 import { IIsAccessTokenValid } from '../../../../domain/use-cases/authentication/is-accesstoken-valid.ts'
-import { forbidden, ok, serverError } from '../../../helpers/http-helper'
+import { ok, serverError, unauthorized } from '../../../helpers/http-helper'
 import { HttpResponse } from '../../../protocols/http'
 import { Middleware } from '../../../protocols/middleware'
 
@@ -12,18 +12,18 @@ export class AuthMiddleware implements Middleware {
       const { accessToken } = httpRequest
 
       if (!accessToken) {
-        return forbidden(new Error('Access denied'))
+        return unauthorized(new Error('Access denied'))
       }
       const isAccessTokenValid = await this.isAccessTokenValid.isAccessTokenValid({ accessToken })
 
       if (!isAccessTokenValid) {
-        return forbidden(new Error('Access denied'))
+        return unauthorized(new Error('Access denied'))
       }
 
       const accountExists = await this.doesAccountExists.doesAccountExists({ email: isAccessTokenValid.email })
 
       if (!accountExists) {
-        return forbidden(new Error('Access denied'))
+        return unauthorized(new Error('Access denied'))
       }
 
       return ok({})

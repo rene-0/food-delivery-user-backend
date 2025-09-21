@@ -1,13 +1,12 @@
 import { User } from '../../models/entities/User'
 
-export interface IAuthentication {
-  authenticate: (request: IAuthentication.Request) => Promise<IAuthentication.Response>
+export interface IRefreshToken {
+  refreshToken: (request: IRefreshToken.Request) => Promise<IRefreshToken.Response>
 }
 
-export namespace IAuthentication {
+export namespace IRefreshToken {
   export type Request = {
-    email: string
-    password: string
+    refreshToken: string
   }
 
   type AccessToken = {
@@ -21,6 +20,5 @@ export namespace IAuthentication {
     phoneNumber: User['phoneNumber']
     password?: never
     accessToken: AccessToken
-    refreshToken: string
   }
 }
