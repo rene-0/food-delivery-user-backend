@@ -9,7 +9,7 @@ export namespace UpdateUserRepository {
     id: User['id']
     name: User['name']
     email: User['email']
-    password: User['password']
+    password?: User['password']
     phoneNumber: User['phoneNumber']
   }
 
@@ -17,7 +17,6 @@ export namespace UpdateUserRepository {
     id: User['id']
     name: User['name']
     email: User['email']
-    password: User['password']
     phoneNumber: User['phoneNumber']
     createdAt: string
     updatedAt: string

@@ -26,7 +26,8 @@ export class UserRepository implements FindUserByEmailRepository, DoesAccountExi
       SET
         name = COALESCE(:name, name),
         "phoneNumber" = COALESCE(:phoneNumber, "phoneNumber"),
-        password = COALESCE(:password, password)
+        password = COALESCE(:password, password),
+        "updatedAt" = now()
       WHERE id = :id
       RETURNING id, name, email, "phoneNumber", "createdAt", "updatedAt"
     `

@@ -18,7 +18,7 @@ export class UpdateUser implements IUpdateUser {
     }
 
     const completeUser = { ...existingUser, ...request }
-    if ('password' in request && completeUser.password) {
+    if ('password' in request && request.password) {
       completeUser.password = await argon2.hash(PEPPER + request.password, {
         type: argon2.argon2id, // Argon2id: defesa contra GPU e side-channels
         memoryCost: 19456, // ~19 MB
@@ -27,6 +27,6 @@ export class UpdateUser implements IUpdateUser {
       })
     }
     const user = await this.userRepository.updateUser(completeUser)
-    return new User(user.id, user.name, user.email, user.password, user.phoneNumber, user.createdAt, user.updatedAt)
+    return new User(user.id, user.name, user.email, '', user.phoneNumber, user.createdAt, user.updatedAt)
   }
 }

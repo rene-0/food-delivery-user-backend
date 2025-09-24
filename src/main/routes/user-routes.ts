@@ -5,5 +5,5 @@ import { makeUpdateUserController } from '../factories/controllers/http/user/upd
 import { isAuth } from '../middlewares/http/authentication/auth-middleware'
 export default (router: Router): void => {
   router.post('/users', adaptRoute(makeCreateUserController()))
-  router.put('/users', isAuth, adaptRoute(makeUpdateUserController()))
+  router.put('/users', isAuth, (req, res) => adaptRoute(makeUpdateUserController(req, res))(req, res))
 }
