@@ -18,7 +18,7 @@ export class UpdateUser implements IUpdateUser {
     }
 
     const completeUser = { ...existingUser, ...request }
-    if ('password' in request) {
+    if ('password' in request && completeUser.password) {
       completeUser.password = await argon2.hash(PEPPER + request.password, {
         type: argon2.argon2id, // Argon2id: defesa contra GPU e side-channels
         memoryCost: 19456, // ~19 MB
