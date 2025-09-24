@@ -41,7 +41,7 @@ export class Order {
       id: this._id,
       status: this._status,
       user: this._user.toJson(),
-      products: this._orderProducts.map((orderProduct) => orderProduct.toJson()),
+      orderProducts: this._orderProducts.map((orderProduct) => orderProduct.toJson()),
       createdAt: this._createdAt.formattedDate,
       updatedAt: this._updatedAt.formattedDate,
     }

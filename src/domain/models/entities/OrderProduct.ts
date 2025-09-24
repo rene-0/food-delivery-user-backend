@@ -44,7 +44,7 @@ export class OrderProduct {
     return {
       id: this._id,
       orderId: this._orderId,
-      products: this._products.toJson(),
+      product: this._products.toJson(),
       quantity: this._quantity,
       createdAt: this.createdAt.toString(),
       updatedAt: this.updatedAt.toString(),
