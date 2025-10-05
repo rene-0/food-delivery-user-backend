@@ -12,5 +12,5 @@ export namespace IUpdateUser {
     phoneNumber?: string
   }
 
-  export type Response = User
+  export type Response = User | null
 }

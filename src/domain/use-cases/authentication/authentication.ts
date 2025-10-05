@@ -22,5 +22,5 @@ export namespace IAuthentication {
     password?: never
     accessToken: AccessToken
     refreshToken: string
-  }
+  } | null
 }
