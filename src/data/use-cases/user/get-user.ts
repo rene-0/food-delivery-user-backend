@@ -9,6 +9,6 @@ export class GetUser implements IGetUser {
     if (!user) {
       throw null
     }
-    return new User(user.id, user.name, user.email, user.password, user.phoneNumber, user.createdAt, user.updatedAt)
+    return new User(user.id, user.name, user.email, '', user.phoneNumber, user.createdAt, user.updatedAt)
   }
 }
