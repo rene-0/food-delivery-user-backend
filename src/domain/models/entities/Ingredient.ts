@@ -5,8 +5,6 @@ export class Ingredient {
   private readonly _updatedAt: Date
 
   constructor(private readonly _id: string, private readonly _name: string, _createdAtString: string, _updatedAtString: string) {
-    this._id = _id
-    this._name = _name
     this._createdAt = new Date(_createdAtString)
     this._updatedAt = new Date(_updatedAtString)
   }

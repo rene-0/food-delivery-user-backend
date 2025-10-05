@@ -9,10 +9,27 @@ export namespace GetProductRepository {
     productId: number
   }
 
-  export type Response = {
-    id: Product['id']
+  type Ingredient = {
+    id: string
+    name: string
+    createdAt: string
+    updatedAt: string
+  }
+
+  export type QueryResponse = {
+    id: string
     name: Product['name']
     price: Product['price']
+    ingredient: Ingredient
+    createdAt: string
+    updatedAt: string
+  }
+
+  export type Response = {
+    id: string
+    name: Product['name']
+    price: Product['price']
+    ingredients: Ingredient[]
     createdAt: string
     updatedAt: string
   }

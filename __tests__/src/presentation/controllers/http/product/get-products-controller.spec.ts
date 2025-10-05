@@ -8,7 +8,7 @@ describe('GetProductsController', () => {
     expect(response.statusCode).toBe(200)
     expect(response.body).toStrictEqual([
       {
-        id: 1,
+        id: '1',
         name: 'any_name',
         price: 10,
         ingredients: [

@@ -26,10 +26,18 @@ export namespace GetProductController {
     id: number
   }
 
+  type Ingredient = {
+    id: string
+    name: string
+    createdAt: string
+    updatedAt: string
+  }
+
   export type Response = {
     id: Product['id']
     name: Product['name']
     price: Product['price']
+    ingredients: Ingredient[]
     createdAt: string
     updatedAt: string
   }

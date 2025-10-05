@@ -5,7 +5,7 @@ export class Product {
   private readonly _createdAt: Date
   private readonly _updatedAt: Date
   constructor(
-    private readonly _id: number,
+    private readonly _id: string,
     private readonly _name: string,
     private readonly _price: number,
     private readonly _ingredients: Ingredient[],

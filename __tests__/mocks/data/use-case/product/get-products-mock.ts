@@ -4,6 +4,6 @@ import { IGetProducts } from '../../../../../src/domain/use-cases/product/get-pr
 
 export class GetProductsMock implements IGetProducts {
   async getProducts(): Promise<IGetProducts.Response> {
-    return [new Product(1, 'any_name', 10, [new Ingredient('1', 'any_name', '1998-01-01', '1998-01-01')], '1998-01-01', '1998-01-01')]
+    return [new Product('1', 'any_name', 10, [new Ingredient('1', 'any_name', '1998-01-01', '1998-01-01')], '1998-01-01', '1998-01-01')]
   }
 }
