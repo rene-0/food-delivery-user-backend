@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/main/server.ts",
     "migrate": "npm run build && sequelize db:migrate",
-    "build": "tsc",
+    "build": "rimraf dist && tsc",
     "prepare": "husky",
     "reinstall": "rimraf node_modules && rimraf package-lock.json && npm i",
     "test": "jest",
