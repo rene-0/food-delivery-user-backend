@@ -5,10 +5,12 @@ export class AuthenticationMock implements IAuthentication {
     return {
       name: 'Any name',
       email: 'email@email.com',
+      phoneNumber: '1234567890',
       accessToken: {
         token: 'any_token',
         expiresIn: 3600,
       },
+      refreshToken: 'any_refresh_token',
     }
   }
 }

@@ -17,7 +17,7 @@ describe('GetUserController', () => {
     expect(response.body).toEqual({
       name: 'any_name',
       email: 'any_email@hotmail.com',
-      phoneNumber: 'any_phoneNumber',
+      phoneNumber: '1234567890',
       createdAt: '1998-01-01',
       updatedAt: '1998-01-01',
     })

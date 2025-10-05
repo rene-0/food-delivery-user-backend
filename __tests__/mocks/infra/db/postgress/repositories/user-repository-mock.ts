@@ -11,7 +11,7 @@ export class UserRepositoryMock implements FindUserByEmailRepository, DoesAccoun
       name: 'any_name',
       email: 'any_email',
       password: 'any_password',
-      phoneNumber: 'any_phoneNumber',
+      phoneNumber: '1234567890',
     }
   }
 
@@ -25,7 +25,7 @@ export class UserRepositoryMock implements FindUserByEmailRepository, DoesAccoun
       name: 'any_name',
       email: 'any_email',
       password: 'any_password',
-      phoneNumber: 'any_phoneNumber',
+      phoneNumber: '1234567890',
       createdAt: 'any_createdAt',
       updatedAt: 'any_updatedAt',
     }
@@ -37,7 +37,7 @@ export class UserRepositoryMock implements FindUserByEmailRepository, DoesAccoun
       name: 'any_name',
       email: 'any_email',
       password: 'any_password',
-      phoneNumber: 'any_phoneNumber',
+      phoneNumber: '1234567890',
       createdAt: 'any_createdAt',
       updatedAt: 'any_updatedAt',
     }

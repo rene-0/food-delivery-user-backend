@@ -16,7 +16,7 @@ describe('CreateUserController', () => {
       name: 'any_name',
       email: 'any_email@hotmail.com',
       password: 'any_password',
-      phoneNumber: 'any_phoneNumber',
+      phoneNumber: '1234567890',
     })
     expect(response.statusCode).toBe(400)
   })
@@ -27,27 +27,27 @@ describe('CreateUserController', () => {
       name: 'any_name',
       email: 'any_email@hotmail.com',
       password: 'any_password',
-      phoneNumber: 'any_phoneNumber',
+      phoneNumber: '1234567890',
     })
     expect(response.statusCode).toBe(200)
     expect(response.body).toEqual({
       name: 'any_name',
       email: 'any_email@hotmail.com',
-      phoneNumber: 'any_phoneNumber',
+      phoneNumber: '1234567890',
       createdAt: '1998-01-01',
       updatedAt: '1998-01-01',
     })
   })
 
   it('should return server error when exception is throw', async () => {
-    const auth = new CreateUserMock()
-    jest.spyOn(auth, 'createUser').mockRejectedValueOnce(new Error('any_error'))
-    const sut = new CreateUserController(auth)
+    const createUser = new CreateUserMock()
+    jest.spyOn(createUser, 'createUser').mockRejectedValueOnce(new Error('any_error'))
+    const sut = new CreateUserController(createUser)
     const response = await sut.handle({
       name: 'any_name',
       email: 'any_email@hotmail.com',
       password: 'any_password',
-      phoneNumber: 'any_phoneNumber',
+      phoneNumber: '1234567890',
     })
     expect(response.statusCode).toBe(500)
   })

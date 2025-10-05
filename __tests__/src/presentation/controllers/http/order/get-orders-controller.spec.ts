@@ -13,13 +13,6 @@ describe('GetOrdersController', () => {
         products: [],
         status: 'done',
         updatedAt: '1998-01-01',
-        user: {
-          createdAt: '1998-01-01',
-          email: 'any_email',
-          name: 'any_name',
-          phoneNumber: 'any_phone_number',
-          updatedAt: '1998-01-01',
-        },
       },
     ])
   })

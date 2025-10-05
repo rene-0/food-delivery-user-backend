@@ -19,7 +19,7 @@ describe('UpdateOrderController', () => {
     expect(response.body).toStrictEqual({
       createdAt: '1998-01-01',
       id: 'any_id',
-      products: [],
+      orderProducts: [],
       status: 'done',
       updatedAt: '1998-01-01',
       user: {
