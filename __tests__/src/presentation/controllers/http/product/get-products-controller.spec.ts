@@ -11,6 +11,14 @@ describe('GetProductsController', () => {
         id: 1,
         name: 'any_name',
         price: 10,
+        ingredients: [
+          {
+            id: '1',
+            name: 'any_name',
+            createdAt: '1998-01-01',
+            updatedAt: '1998-01-01',
+          },
+        ],
         createdAt: '1998-01-01',
         updatedAt: '1998-01-01',
       },

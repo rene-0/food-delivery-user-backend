@@ -36,8 +36,6 @@ describe('UpdateUserController', () => {
       email: 'mock@example.com',
       name: 'Mock User',
       phoneNumber: '1234567890',
-      // createdAt: '1998-01-01',
-      // updatedAt: '1998-01-01',
     })
   })
 
