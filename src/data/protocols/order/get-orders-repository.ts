@@ -39,6 +39,12 @@ export namespace GetOrdersRepository {
       quantity: number
       createdAt: string
       updatedAt: string
+      ingredient: {
+        id: string
+        name: string
+        createdAt: string
+        updatedAt: string
+      }
     }
     product: OrderProduct
   }
@@ -56,6 +62,14 @@ export namespace GetOrdersRepository {
     id: Product['id']
     name: Product['name']
     price: Product['price']
+    ingredients: OrderIngredient[]
+    createdAt: string
+    updatedAt: string
+  }
+
+  type OrderIngredient = {
+    id: string
+    name: string
     createdAt: string
     updatedAt: string
   }

@@ -8,7 +8,8 @@ export const createOrderSchema = Joi.object<CreateOrderController.Request, true>
       Joi.object({
         id: Joi.string().required(),
         quantity: Joi.number().min(1).required(),
-      })
+        ingredientIds: Joi.array().items(Joi.string()).min(1).required(),
+      }),
     )
     .min(1)
     .required(),

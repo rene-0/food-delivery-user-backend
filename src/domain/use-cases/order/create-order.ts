@@ -7,7 +7,11 @@ export interface ICreateOrder {
 export namespace ICreateOrder {
   export type Request = {
     userId: string
-    products: Array<{ id: string; quantity: number }>
+    products: Array<{
+      id: string
+      quantity: number
+      ingredientIds: string[]
+    }>
   }
 
   export type Response = Order | null

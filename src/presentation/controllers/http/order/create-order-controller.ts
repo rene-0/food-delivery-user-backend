@@ -15,14 +15,24 @@ export class CreateOrderController implements Controller {
           validationResult.error.details.map((detail) => ({
             field: detail.path.join('.'),
             message: detail.message,
-          }))
+          })),
         )
       }
       const order = await this.createOrder.createOrder({
         userId: httpRequest.user.id,
         products: httpRequest.products,
       })
-      return ok(order.toJson())
+      const original = order.toJson()
+      return ok({
+        id: original.id,
+        status: original.status,
+        createdAt: original.createdAt,
+        updatedAt: original.updatedAt,
+        products: original.orderProducts.map((orderProduct) => ({
+          ...orderProduct.product,
+          quantity: orderProduct.quantity,
+        })),
+      })
     } catch (error) {
       return serverError(error)
     }
@@ -32,12 +42,31 @@ export class CreateOrderController implements Controller {
 export namespace CreateOrderController {
   export type Request = {
     user: { id: string }
-    products: Array<{ id: string; quantity: number }>
+    products: Array<{
+      id: string
+      quantity: number
+      ingredientIds: string[]
+    }>
+  }
+
+  type Ingredient = {
+    id: string
+    name: string
+    createdAt: string
+    updatedAt: string
+  }
+
+  type Product = {
+    id: string
+    name: string
+    price: number
+    quantity: number
+    ingredients: Ingredient[]
   }
 
   export type Response = {
     id: string
-    products: Array<{ id: string; name: string; price: number; quantity: number }>
+    products: Product[]
     createdAt: string
     updatedAt: string
   }

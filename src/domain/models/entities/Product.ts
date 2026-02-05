@@ -35,6 +35,7 @@ export class Product {
   }
 
   toJson() {
+    console.log('this.ingredients', this.ingredients)
     return {
       id: this.id,
       name: this.name,

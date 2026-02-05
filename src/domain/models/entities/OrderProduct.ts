@@ -7,7 +7,7 @@ export class OrderProduct {
   constructor(
     private readonly _id: string,
     private readonly _orderId: string,
-    private readonly _products: Product,
+    private readonly _product: Product,
     private readonly _quantity: number,
     createdAt: string,
     updatedAt: string
@@ -24,8 +24,8 @@ export class OrderProduct {
     return this._orderId
   }
 
-  get products(): Product {
-    return this._products
+  get product(): Product {
+    return this._product
   }
 
   get quantity(): number {
@@ -44,7 +44,7 @@ export class OrderProduct {
     return {
       id: this._id,
       orderId: this._orderId,
-      product: this._products.toJson(),
+      product: this._product.toJson(),
       quantity: this._quantity,
       createdAt: this.createdAt.toString(),
       updatedAt: this.updatedAt.toString(),

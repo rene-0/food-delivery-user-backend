@@ -29,7 +29,17 @@ export class UpdateOrderController implements Controller {
         return badRequest([{ field: 'orderId', message: 'Order not found' }])
       }
 
-      return ok(order.toJson())
+      const original = order.toJson()
+      return ok({
+        id: original.id,
+        status: original.status,
+        createdAt: original.createdAt,
+        updatedAt: original.updatedAt,
+        products: original.orderProducts.map((orderProduct) => ({
+          ...orderProduct.product,
+          quantity: orderProduct.quantity,
+        })),
+      })
     } catch (error) {
       return serverError(error)
     }

@@ -7,8 +7,14 @@ export interface CreateOrderRepository {
 export namespace CreateOrderRepository {
   export type Request = {
     userId: string
-    products: Array<{ id: string; quantity: number }>
+    products: Product[]
     status: Order['status']
+  }
+
+  type Product = {
+    id: string
+    quantity: number
+    ingredientIds: string[]
   }
 
   export type Response = {

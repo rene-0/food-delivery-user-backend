@@ -15,14 +15,12 @@ export class GetOrdersController implements Controller {
           return {
             id: original.id,
             status: original.status,
-            products: original.orderProducts.map((orderProduct) => ({
-              id: orderProduct.id,
-              name: orderProduct.product.name,
-              price: orderProduct.product.price,
-              quantity: orderProduct.quantity,
-            })),
             createdAt: original.createdAt,
             updatedAt: original.updatedAt,
+            products: original.orderProducts.map((orderProduct) => ({
+              ...orderProduct.product,
+              quantity: orderProduct.quantity,
+            })),
           }
         })
       )
@@ -37,10 +35,25 @@ export namespace GetOrdersController {
     user: { id: string }
   }
 
+  type Ingredient = {
+    id: string
+    name: string
+    createdAt: string
+    updatedAt: string
+  }
+
+  type Product = {
+    id: string
+    name: string
+    price: number
+    quantity: number
+    ingredients: Ingredient[]
+  }
+
   export type Order = {
     id: string
     status: string
-    products: Array<{ id: string; name: string; price: number; quantity: number }>
+    products: Product[]
     createdAt: string
     updatedAt: string
   }

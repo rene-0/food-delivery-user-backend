@@ -1,3 +1,4 @@
+import { Ingredient } from '../../../domain/models/entities/Ingredient'
 import { Order } from '../../../domain/models/entities/Order'
 import { OrderProduct } from '../../../domain/models/entities/OrderProduct'
 import { Product } from '../../../domain/models/entities/Product'
@@ -28,14 +29,21 @@ export class CreateOrder implements ICreateOrder {
             new OrderProduct(
               orderProduct.id,
               order.id,
-              new Product(orderProduct.product.id, orderProduct.product.name, orderProduct.product.price, orderProduct.product.createdAt, orderProduct.product.updatedAt),
+              new Product(
+                orderProduct.product.id,
+                orderProduct.product.name,
+                orderProduct.product.price,
+                orderProduct.product.ingredients.map((ingredient) => new Ingredient(ingredient.id, ingredient.name, ingredient.createdAt, ingredient.updatedAt)),
+                orderProduct.product.createdAt,
+                orderProduct.product.updatedAt,
+              ),
               orderProduct.quantity,
               orderProduct.createdAt,
-              orderProduct.updatedAt
-            )
+              orderProduct.updatedAt,
+            ),
         ),
         order.createdAt,
-        order.updatedAt
+        order.updatedAt,
       )
     }
     return null
